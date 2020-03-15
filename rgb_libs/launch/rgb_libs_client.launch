@@ -1,0 +1,12 @@
+<launch>
+  <arg name="serviceName"       default="image_capture_py"/>
+  <!-- <arg name="serviceName"      default="image_cmd"/> -->
+  <!-- <arg name="rgb_topicName"     default="/camera_remote/rgb/image_rect_color"/> -->
+  <!-- <arg name="rgb_fileAddress"   default="/home/buivn/bui_ws/src/rgbLibs/scripts/testImg/test3.jpg"/> -->
+
+
+  <node name="rgb_libs_client" pkg="rgb_libs" type="rgb_libs_client">
+    <param name="serviceName" value="$(arg serviceName)"/>
+  </node>
+
+</launch>
