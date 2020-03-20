@@ -64,7 +64,7 @@ void rgbLibs::imageCallback(const sensor_msgs::ImageConstPtr& msg){
   }
 }
 
-bool rgbLibs::check_and_save(rgb_libs::image_cmd::Request &req, rgb_libs::image_cmd::Response &res){
+bool rgbLibs::check_and_save(rgb_libs::image_save::Request &req, rgb_libs::image_save::Response &res){
   if (req.cmd) {
     //image name composed by path (finished with "/")+ capture angle+extension
     std::string im_name = req.path + req.num_name+ ".png";

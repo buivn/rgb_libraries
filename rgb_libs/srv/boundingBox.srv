@@ -1,0 +1,4 @@
+bool cmd
+bool topic
+---
+int16[] vecCen

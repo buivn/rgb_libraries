@@ -1,13 +1,14 @@
 <launch>
   <arg name="rgb_topicName"     default="/camera_remote/rgb/image_rect_color"/>
-  <arg name="rgb_fileAddress"   default="/home/buivn/bui_ws/src/rgbLibs/scripts/testImg/test3.jpg"/>
+  <arg name="rgb_fileAddress"   default="/home/buivn/bui_ws/src/rgb_libs/images/camera_image.jpg"/>
+  <arg name="yolo_model"   		default="/home/buivn/bui_ws/src/rgb_libs/cnn_models/cv_model_07112019.h5"/>
 
 <!--   <node name="rgb_libs_cpp" pkg="rgb_libs" type="rgb_libs">
     <param name="rgb_topicName"  value="$(arg rgb_topicName)"/>
     <param name="rgb_fileAddress" value="$(arg rgb_fileAddress)"/>
   </node> -->
 <!--   <node name="rgb_libs_py" pkg="rgb_libs" type="bboxServer.py" output="screen" respawn="false" args="-topic /camera_remote/rgb/image_rect_color -file rgb_fileAddress" /> -->
-  <node name="rgb_libs_py" pkg="rgb_libs" type="bboxServer.py" output="screen" respawn="false" args="-topic $(arg rgb_topicName) -file $(arg rgb_fileAddress)" />
+  <node name="rgb_libs_py" pkg="rgb_libs" type="bboxServer.py" output="screen" respawn="false" args="-topic $(arg rgb_topicName) -file $(arg rgb_fileAddress) -model $(arg yolo_model)" />
 
 
 </launch>

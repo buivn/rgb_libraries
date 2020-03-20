@@ -10,7 +10,8 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <cv_bridge/cv_bridge.h>
 #include <Eigen/Dense>
-#include "rgb_libs/image_cmd.h"
+#include "rgb_libs/image_save.h"
+#include "rgb_libs/boundingBox.h"
 
 using EvXf = Eigen::VectorXf;
 using Ev4f = Eigen::Vector4f;
@@ -45,7 +46,7 @@ namespace rgb_libs
 
       // list of Callbackfunction
       void imageCallback(const sensor_msgs::ImageConstPtr& msg);
-      bool check_and_save(rgb_libs::image_cmd::Request &req, rgb_libs::image_cmd::Response &res);
+      bool check_and_save(rgb_libs::image_save::Request &req, rgb_libs::image_save::Response &res);
 
 
     private:

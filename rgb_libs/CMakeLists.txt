@@ -24,8 +24,6 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   sensor_msgs
   eigen_conversions
-  tf
-  urdf
   cv_bridge
   image_transport
   OpenCV
@@ -33,14 +31,16 @@ find_package(catkin REQUIRED COMPONENTS
 
 add_message_files(
   FILES
-  controllerCheck.msg
+  centroid.msg
+  centroidArray.msg
+  int16Array.msg
 )
 
 # add_definitions("-DUSE_ROS")
 
 ## Generate services in the 'srv' folder -> this one must be above generate_messages and catkin_package
 add_service_files(
-  FILES image_cmd.srv
+  FILES image_save.srv boundingBox.srv
   )
 
 ## Generate added messages and services with any dependencies listed here
@@ -62,23 +62,23 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include 
-  ${catkin_INCLUDE_DIRS} 
-  # ${PCL_INCLUDE_DIRS} 
+  include
+  ${catkin_INCLUDE_DIRS}  
   ${Boost_INCLUDE_DIRS}
 )
 
 add_executable(rgb_libs src/rgb_libs.cpp)
 # This line tells catkin to first build the messages in turtlesim before trying to build this node.
 # That is because we rely on the turtlesim/Pose message, which becomes a header file after it's compiled
-add_dependencies(rgb_libs ${${PPROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} rgb_libs_gencpp)
+add_dependencies(rgb_libs ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 # This links up the node with the compiled libraries catkin knows about.
 # Basically, it allows the node to leverage ROS libraries.
 target_link_libraries(rgb_libs ${catkin_LIBRARIES} ${OpenCV_LIBS} ${Boost_LIBRARIES})
 
 add_executable(rgb_libs_client src/rgb_libs_client.cpp)
-add_dependencies(rgb_libs_client ${${PPROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} rgb_libs_gencpp)
+# add_dependencies(rgb_libs_client ${${PPROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} rgb_libs_gencpp)
+add_dependencies(rgb_libs_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries(rgb_libs_client ${catkin_LIBRARIES} ${OpenCV_LIBS} ${Boost_LIBRARIES})
 
 
@@ -87,7 +87,7 @@ target_link_libraries(rgb_libs_client ${catkin_LIBRARIES} ${OpenCV_LIBS} ${Boost
 # Install
 ################################################################################
 catkin_install_python(
-  PROGRAMS scripts/bboxServer.py
+  PROGRAMS scripts/bboxServer.py scripts/bbox.py scripts/imageServer.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

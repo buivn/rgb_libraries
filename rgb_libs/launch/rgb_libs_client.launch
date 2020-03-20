@@ -1,6 +1,6 @@
 <launch>
-  <arg name="serviceName"       default="image_capture_py"/>
-  <!-- <arg name="serviceName"      default="image_cmd"/> -->
+  <!-- <arg name="serviceName"       default="image_capture_py"/> -->
+  <arg name="serviceName"      default="boundingBox"/>
   <!-- <arg name="rgb_topicName"     default="/camera_remote/rgb/image_rect_color"/> -->
   <!-- <arg name="rgb_fileAddress"   default="/home/buivn/bui_ws/src/rgbLibs/scripts/testImg/test3.jpg"/> -->
 
